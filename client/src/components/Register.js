@@ -69,13 +69,16 @@ export const Register = () => {
   };
 
   return (
-    <div className='bg-slate-200 md:w-2/4 md:h-3/5 rounded-md shadow-lg p-5 flex flex-col items-center justify-evenly '>
-      <h1 className='text-4xl font-bold'>Create User</h1>
+    <div className='bg-slate-200 md:w-2/4 md:h-3/5 rounded-md shadow-lg p-5 flex flex-col items-center justify-evenly border-4 border-amber-300'>
+      <h1 className='text-4xl font-bold'>Register New User</h1>
       <div className='my-5 flex flex-col items-center gap-6'>
         {failedRegister && (
           <div className='flex flex-col items-center'>
             <h2 className='text-xl text-rose-700 font-extrabold'>
-              Login failed
+              Register failed
+            </h2>
+            <h2 className='text-lg text-rose-700 font-extrabold'>
+              Or user exists
             </h2>
             <h3 className='text-md text-rose-700 font-bold'>
               Please try again or click login below
@@ -136,10 +139,21 @@ export const Register = () => {
                 return { ...prev, password: e.target.value };
               });
             }}
+            onKeyPress={event => {
+              if (event.key === 'Enter') {
+                postUser();
+              }
+            }}
           ></input>
         </label>
       </div>
       <div className='flex gap-4'>
+        <button
+          className='bg-[#48b68d] rounded px-2 py-1 hover:text-amber-500 hover:bg-green-800'
+          onClick={e => postUser()}
+        >
+          Register
+        </button>
         <button
           className='bg-[#48b68d] rounded px-2 py-1 hover:text-amber-500 hover:bg-green-800'
           onClick={e => {
@@ -147,12 +161,6 @@ export const Register = () => {
           }}
         >
           Login
-        </button>
-        <button
-          className='bg-[#48b68d] rounded px-2 py-1 hover:text-amber-500 hover:bg-green-800'
-          onClick={e => postUser()}
-        >
-          Register
         </button>
       </div>
     </div>

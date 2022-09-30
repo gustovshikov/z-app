@@ -77,7 +77,21 @@ const App = () => {
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
         </Routes>
-        <h1 className='text-slate-100'>copyright InveDex</h1>
+        <span className='text-slate-100 pt-4'>copyright InveDex 2022</span>
+        <span className='text-slate-100 pb-4'>
+          <button
+            className=' underline hover:font-bold hover:text-amber-500'
+            onClick={e =>
+              window.open(
+                'https://api.cyberhelm.com/',
+                '_blank',
+                'noopener,noreferrer'
+              )
+            }
+          >
+            https://api.cyberhelm.com/
+          </button>
+        </span>
       </div>
     </AppContext.Provider>
   );

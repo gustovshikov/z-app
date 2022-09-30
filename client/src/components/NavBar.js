@@ -13,7 +13,7 @@ export const NavBar = () => {
   } = useContext(AppContext);
 
   return (
-    <div className='border-b-2 border-amber-500 rounded w-4/5  h-14 flex-row flex justify-between items-center text-stone-50 font-bold'>
+    <div className='border-b-2 border-amber-500 rounded md:w-4/5  md:h-14 flex-row flex flex-wrap justify-between items-center text-stone-50 font-bold'>
       <div className='flex flex-row items-center'>
         <button onClick={e => navigate('/')}>
           <img
@@ -29,7 +29,7 @@ export const NavBar = () => {
           <span className='font-extrabold  text-2xl mx-3'>{userAccount}</span>
         </div>
       )}
-      <div className='flex flex-row items-center justify-between gap-5'>
+      <div className='flex flex-row flex-wrap items-center justify-between gap-5'>
         <div className='w-12'>
           <button
             className=' hover:text-amber-500 hover:font-extrabold'

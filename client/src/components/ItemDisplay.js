@@ -65,15 +65,18 @@ export const ItemDisplay = () => {
           </button>
         )}
       </div>
-      <div className='flex flex-row flex-wrap justify-center gap-4 w-4/5 mt-10'>
+      <div className='flex flex-row flex-wrap justify-center gap-4 md:w-4/5 mt-10'>
         {showFiltered && (
           <>
             {filteredItems.length > 0 ? (
               filteredItems.map((item, index) => {
                 let description = item.description.slice(0, 100) + '...';
                 return (
-                  <div key={index} className='bg-slate-200 rounded shadow-lg'>
-                    <div className='flex flex-col justify-between w-60 h-full p-3'>
+                  <div
+                    key={index}
+                    className='bg-slate-200 rounded shadow-lg border-4 border-amber-300'
+                  >
+                    <div className='flex flex-col justify-between w-full md:w-60 h-full p-3'>
                       <div>
                         <div className='flex items-center justify-between'>
                           <div className=' w-11/12 text-center'>
@@ -124,9 +127,9 @@ export const ItemDisplay = () => {
                 );
               })
             ) : (
-              <div className='flex flex-col items-center my-10 bg-slate-200 rounded-md p-10 shadow-2xl'>
+              <div className='flex flex-col items-center md:my-10 bg-slate-200 rounded-md p-10 shadow-2xl border-4 border-amber-300'>
                 <h1 className='text-4xl '>No items owned by your account.</h1>
-                <p className='text-2xl '>Create some above.</p>
+                <p className='text-2xl '>Create some or change view above.</p>
               </div>
             )}
           </>
@@ -135,10 +138,16 @@ export const ItemDisplay = () => {
           <>
             {items.length > 0 ? (
               items.map((item, index) => {
-                let description = item.description.slice(0, 100) + '...';
+                let description = item.description;
+                if (item.description.length > 100) {
+                  description = item.description.slice(0, 100) + '...';
+                }
                 return (
-                  <div key={index} className='bg-slate-200 rounded shadow-lg'>
-                    <div className='flex flex-col justify-between w-60 h-full p-3'>
+                  <div
+                    key={index}
+                    className='bg-slate-200 rounded shadow-lg border-4 border-amber-300'
+                  >
+                    <div className='flex flex-col justify-between w-full md:w-60 h-full p-3 '>
                       <div>
                         <div className='flex items-center justify-between'>
                           <div className=' w-11/12 text-center'>

@@ -42,14 +42,17 @@ export const Login = () => {
           setCookie('user_id', user_id.id, {
             maxAge: cookieInfo[2].maxAge,
             sameSite: 'None',
+            secure: 'true',
           });
           setCookie('user', user_id.user_name, {
             maxAge: cookieInfo[2].maxAge,
             sameSite: 'None',
+            secure: 'true',
           });
           setCookie(cookieInfo[0], cookieInfo[1], {
             maxAge: cookieInfo[2].maxAge,
             sameSite: 'None',
+            secure: 'true',
           });
           setShowFiltered(true);
           setUserAccount(user_id.user_name);
@@ -64,7 +67,7 @@ export const Login = () => {
   };
 
   return (
-    <div className='bg-slate-200 md:w-1/3 md:h-1/3 rounded-md shadow-lg p-5 flex flex-col items-center justify-evenly '>
+    <div className='bg-slate-200 md:w-1/3 md:h-1/3 rounded-md border-4 border-amber-300 shadow-lg p-5 flex flex-col items-center justify-evenly '>
       <h1 className='text-4xl font-bold'>Login</h1>
       <div className='my-5 flex flex-col items-center gap-6'>
         {failedLogin && (
@@ -89,6 +92,11 @@ export const Login = () => {
                 return { ...prev, user_name: e.target.value };
               });
             }}
+            onKeyPress={event => {
+              if (event.key === 'Enter') {
+                postLogin();
+              }
+            }}
           ></input>
         </label>
         <label>
@@ -102,6 +110,11 @@ export const Login = () => {
               setLoginCredentials(prev => {
                 return { ...prev, password: e.target.value };
               });
+            }}
+            onKeyPress={event => {
+              if (event.key === 'Enter') {
+                postLogin();
+              }
             }}
           ></input>
         </label>

@@ -83,7 +83,7 @@ export const ItemDetail = () => {
   return (
     <>
       {currentItem !== null ? (
-        <div className='bg-slate-200  rounded shadow-lg md:w-3/5 md:h-2/5 flex flex-col justify-around p-10'>
+        <div className='bg-slate-200  rounded shadow-lg md:w-3/5 md:h-2/5 flex flex-col justify-around p-10 border-4 border-amber-300'>
           <div className='flex'>
             <span className='text-5xl font-bold '>Item: </span>
             {!updating && (
