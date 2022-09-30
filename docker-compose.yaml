@@ -1,0 +1,47 @@
+version: '3.2'
+services:
+  client:
+    build: ./client
+    ports:
+      - '3000:3000'
+    networks:
+      - app-network
+    volumes:
+      - type: bind
+        source: ./client
+        target: /app
+    depends_on:
+      - server
+
+  server:
+    build: ./server
+    ports:
+      - '3001:3001'
+    networks:
+      - app-network
+    environment:
+      DB_CONNECTION_STRING: postgres://postgres:password@db:5432/z_app
+    volumes:
+      - type: bind
+        source: ./server
+        target: /app
+    depends_on:
+      - db
+
+  db:
+    image: postgres
+    container_name: z-app-db
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: z_app
+    volumes:
+      - $HOME/docker/volumes/postgres-z_app/:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
