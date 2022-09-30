@@ -13,11 +13,12 @@ import { Splash } from './components/Splash';
 export const AppContext = createContext();
 
 const App = () => {
-  const apiServer = 'http://localhost:3001';
+  // const apiServer = 'http://localhost:3001';
+  const apiServer = 'https://api.cyberhelm.com';
   const [items, setItems] = useState([]);
 
   const [userAccount, setUserAccount] = useState(null);
-  const [showAllItems, setShowAllItems] = useState(true);
+
   const [cookies, setCookie, removeCookie] = useCookies([
     'auth',
     'user_id',

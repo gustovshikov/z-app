@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { AppContext } from '../App.js';
 
 export const NavBar = () => {
@@ -12,10 +12,6 @@ export const NavBar = () => {
     setShowFiltered,
   } = useContext(AppContext);
 
-  // console.log(cookies);
-  // if (cookies.auth) {
-  //   console.log('logged in');
-  // }
   return (
     <div className='border-b-2 border-amber-500 rounded w-4/5  h-14 flex-row flex justify-between items-center text-stone-50 font-bold'>
       <div className='flex flex-row items-center'>

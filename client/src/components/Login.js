@@ -1,17 +1,10 @@
 import { useNavigate } from 'react-router-dom';
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { useContext, useState } from 'react';
 import { AppContext } from '../App';
 
 export const Login = () => {
-  const {
-    userAccount,
-    setUserAccount,
-    apiServer,
-    cookies,
-    setCookie,
-    removeCookie,
-    setShowFiltered,
-  } = useContext(AppContext);
+  const { setUserAccount, apiServer, setCookie, setShowFiltered } =
+    useContext(AppContext);
   const navigate = useNavigate();
   const [loginCredentials, setLoginCredentials] = useState({
     user_name: '',
@@ -32,7 +25,7 @@ export const Login = () => {
       body: JSON.stringify(loginCredentials),
     })
       .then(res => {
-        console.log(res.status);
+        // console.log(res.status);
         if (res.status === 200) {
           return res.json();
         } else {
@@ -40,12 +33,12 @@ export const Login = () => {
         }
       })
       .then(data => {
-        console.log(data);
+        // console.log(data);
         if (data === undefined) return;
         if (data.cookie !== undefined) {
           let cookieInfo = data.cookie;
           let user_id = data.user;
-          console.log('return data', data);
+          // console.log('return data', data);
           setCookie('user_id', user_id.id, {
             maxAge: cookieInfo[2].maxAge,
             sameSite: 'None',

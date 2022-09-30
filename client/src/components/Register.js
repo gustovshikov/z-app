@@ -1,16 +1,9 @@
 import { useNavigate } from 'react-router-dom';
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { useContext, useState } from 'react';
 import { AppContext } from '../App';
 
 export const Register = () => {
-  const {
-    userAccount,
-    setUserAccount,
-    apiServer,
-    cookies,
-    setCookie,
-    removeCookie,
-  } = useContext(AppContext);
+  const { setUserAccount, apiServer, setCookie } = useContext(AppContext);
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({
     first_name: '',
@@ -21,7 +14,7 @@ export const Register = () => {
   const [failedRegister, setFailedRegister] = useState(false);
 
   const postUser = () => {
-    console.log('posting nuser');
+    console.log('posting user');
     setFailedRegister(false);
     const { first_name, last_name, user_name, password } = userInfo;
     if (
@@ -43,7 +36,7 @@ export const Register = () => {
       body: JSON.stringify(userInfo),
     })
       .then(res => {
-        console.log(res.status);
+        // console.log(res.status);
         if (res.status === 201) {
           return res.json();
         } else if (res.status === 409) {
@@ -52,11 +45,11 @@ export const Register = () => {
         return res.json();
       })
       .then(data => {
-        console.log(data);
+        // console.log(data);
         if (data.cookie !== undefined) {
           let cookieInfo = data.cookie;
           let user_id = data.user;
-          console.log(user_id);
+          // console.log(user_id);
           setCookie(cookieInfo[0], cookieInfo[1], {
             maxAge: cookieInfo[2].maxAge,
             sameSite: 'None',

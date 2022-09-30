@@ -28,7 +28,7 @@ const whitelist = [
 const corsOptions = {
   credentials: true,
   origin: function (origin, callback) {
-    console.log(origin);
+    // console.log(origin);
     if (whitelist.indexOf(origin) !== -1) {
       callback(null, true);
     } else if (origin === undefined) {
@@ -51,9 +51,9 @@ const authenticateToken = (req, res, next) => {
   // const authHeader = req.headers['authorization'];
   // const token = authHeader && authHeader.split(' ')[1];
   // dont know auth headers yet so using cookie instead
-  console.log(req.cookies);
+  // console.log(req.cookies);
   const token = req.cookies.auth;
-  console.log(token);
+  // console.log(token);
   if (token === undefined) return res.status(401).send('no token');
 
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
@@ -74,7 +74,7 @@ app.post('/login', async (req, res) => {
   const user = await userCheck(req.body.user_name);
   if (user === null) return res.status(400).send('Cannot find user');
   try {
-    console.log(user);
+    // console.log(user);
     if (await bcrypt.compare(req.body.password, user.password)) {
       const userToken = { user_name: user.user_name };
       const accessToken = jwt.sign(userToken, process.env.ACCESS_TOKEN_SECRET);
@@ -143,6 +143,7 @@ app.post('/register', async (req, res) => {
 });
 
 app.get('/items', (req, res) => {
+  console.log('getting all items');
   getAllItems()
     .then(data => res.status(200).send(data))
     .catch(err => res.status(500).send(err));
@@ -150,7 +151,6 @@ app.get('/items', (req, res) => {
 
 // Authenticated Routes /////////////////////////////////////
 app.put('/items/:id', authenticateToken, (req, res) => {
-  console.log('Cookies: ', req.cookies);
   let { id } = req.params;
   console.log('puting item');
   putItemById({ item: req.body, id: id })
@@ -159,7 +159,6 @@ app.put('/items/:id', authenticateToken, (req, res) => {
 });
 
 app.delete('/items/:id', authenticateToken, (req, res) => {
-  console.log('Cookies: ', req.cookies);
   let { id } = req.params;
   console.log('deleting item');
   deleteItemById(id)
@@ -168,7 +167,6 @@ app.delete('/items/:id', authenticateToken, (req, res) => {
 });
 
 app.post('/items', authenticateToken, (req, res) => {
-  console.log('Cookies: ', req.cookies);
   console.log('posting item', req.body);
   postItem(req.body)
     .then(data => res.status(200).send(data))

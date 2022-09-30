@@ -3,7 +3,7 @@ import { useContext, useMemo, useState } from 'react';
 import { AppContext } from '../App';
 
 export const ItemDetail = () => {
-  const { items, cookies, userAccount, apiServer, setTriggerItemFetch } =
+  const { items, userAccount, apiServer, setTriggerItemFetch } =
     useContext(AppContext);
   const navigate = useNavigate();
   const { id } = useParams();
@@ -42,11 +42,11 @@ export const ItemDetail = () => {
       body: JSON.stringify(newItem),
     })
       .then(res => {
-        console.log(res.status);
+        // console.log(res.status);
         return res.json();
       })
       .then(data => {
-        console.log(data);
+        // console.log(data);
         setUpdating(false);
         setTriggerItemFetch(prev => !prev);
       })
@@ -67,11 +67,11 @@ export const ItemDetail = () => {
       body: JSON.stringify(),
     })
       .then(res => {
-        console.log(res.status);
+        // console.log(res.status);
         return res.json();
       })
       .then(data => {
-        console.log(data);
+        // console.log(data);
         setTriggerItemFetch(prev => !prev);
         navigate('/items');
       })

@@ -1,19 +1,17 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useContext, useMemo, useState } from 'react';
 import { AppContext } from '../App';
 
 export const ItemNew = () => {
-  const { items, cookies, userAccount, apiServer, setTriggerItemFetch } =
+  const { cookies, userAccount, apiServer, setTriggerItemFetch } =
     useContext(AppContext);
   const navigate = useNavigate();
-  const { id } = useParams();
   const [currentItem, setCurrentItem] = useState({
     item_name: '',
     description: '',
     quantity: '',
     user_id: '',
   });
-  const [updating, setUpdating] = useState(false);
 
   useMemo(() => {
     if (cookies.user_id) {
@@ -42,13 +40,12 @@ export const ItemNew = () => {
       body: JSON.stringify(newItem),
     })
       .then(res => {
-        console.log(res.status);
+        // console.log(res.status);
         return res.json();
       })
       .then(data => {
-        console.log(data);
+        // console.log(data);
         setTriggerItemFetch(prev => !prev);
-        setUpdating(false);
         navigate(`/items`);
       })
       .catch(err => {

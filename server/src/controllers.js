@@ -6,7 +6,6 @@ const addUser = async items => {
     let currentUser = await knex('user_table')
       .select('user_name', 'first_name', 'last_name')
       .where('id', item.user_id);
-
     item.user_info = currentUser[0];
   }
   return results;
@@ -46,7 +45,6 @@ const postNewUser = async userInfo => {
 const userCheck = async username => {
   console.log(username);
   results = await knex('user_table').select('*').where('user_name', username);
-
   if (results[0] === undefined) {
     return null;
   } else {

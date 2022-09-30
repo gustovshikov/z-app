@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../App';
 
 export const ItemDisplay = () => {
@@ -9,20 +9,12 @@ export const ItemDisplay = () => {
   const [view, setView] = useState('All');
   const [filteredItems, setFilteredItems] = useState([]);
 
-  // useMemo(() => {
-  //   if (cookies.auth) {
-  //     setView(userAccount);
-  //     setShowFiltered(true);
-  //   }
-  // }, [userAccount, cookies]);
-  ///////////////////////////////////////////// combine to one stat instead of having two with the button
-  ////////////////////TODO/////////////////////
   useEffect(() => {
     if (cookies.auth) {
       setView(userAccount);
       setShowFiltered(true);
     }
-    console.log('cookies check', cookies);
+    // console.log('cookies check', cookies);
     if (cookies.user_id !== undefined) {
       let viewableItems = items.filter(
         item => item.user_id.toString() === cookies.user_id.toString()
@@ -35,7 +27,7 @@ export const ItemDisplay = () => {
     }
   }, [userAccount, setFilteredItems, cookies, items, setShowFiltered]);
 
-  console.log(filteredItems);
+  // console.log(filteredItems);
   return (
     <>
       <div className='flex items-center gap-5'>
@@ -93,7 +85,7 @@ export const ItemDisplay = () => {
                             <button
                               className='bg-transparent hover:bg-amber-600 rounded-full'
                               onClick={e => {
-                                console.log(item.id);
+                                // console.log(item.id);
                                 navigate(`/items/${item.id}`);
                               }}
                             >
@@ -158,7 +150,7 @@ export const ItemDisplay = () => {
                             <button
                               className='bg-transparent hover:bg-amber-600 rounded-full'
                               onClick={e => {
-                                console.log(item.id);
+                                // console.log(item.id);
                                 navigate(`/items/${item.id}`);
                               }}
                             >
