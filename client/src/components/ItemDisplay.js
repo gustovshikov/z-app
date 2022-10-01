@@ -30,47 +30,50 @@ export const ItemDisplay = () => {
   // console.log(filteredItems);
   return (
     <>
-      <div className='flex items-center gap-5'>
+      <div className='flex flex-col items-center md:w-1/5 bg-slate-200 rounded-md p-3 shadow-2xl border-4 border-amber-300'>
         {userAccount !== null ? (
-          <button
-            className='bg-slate-200 rounded px-2 py-1 hover:text-amber-500 hover:bg-green-800'
-            onClick={e => {
-              setShowFiltered(prev => !prev);
-              setView(prev => {
-                if (prev === userAccount) {
-                  return 'All';
-                } else if (userAccount !== null) {
-                  return userAccount;
-                } else {
-                  return 'All';
-                }
-              });
-            }}
-          >
-            {`Viewing ${view}`}
-          </button>
+          <>
+            <div className='text-center'>
+              <h3 className='font-bold'>Filter</h3>
+              {showFiltered && `Showing ${userAccount}'s Items`}
+              {!showFiltered && `Showing All Items`}
+            </div>
+            <div className='flex gap-5 mt-4'>
+              <button
+                className='bg-[#48b68d] rounded px-2 py-1 hover:text-amber-500 hover:bg-green-800'
+                onClick={e => {
+                  setShowFiltered(prev => !prev);
+                }}
+              >
+                Change View
+              </button>
+              <button
+                className='bg-[#48b68d] rounded px-2 py-1 hover:text-amber-500 hover:bg-green-800'
+                onClick={e => {
+                  navigate('/items/add');
+                }}
+              >
+                Create Item
+              </button>
+            </div>
+          </>
         ) : (
-          <button className='bg-slate-200 rounded px-2 py-1 '>
-            Viewing All
-          </button>
-        )}
-        {userAccount !== null && (
-          <button
-            className='bg-slate-200 rounded px-2 py-1 hover:text-amber-500 hover:bg-green-800'
-            onClick={e => {
-              navigate('/items/add');
-            }}
-          >
-            Create Item
-          </button>
+          <div className='text-center'>
+            <h3>Filter</h3>
+            <h3>Showing All Items</h3>
+          </div>
         )}
       </div>
+
       <div className='flex flex-row flex-wrap justify-center gap-4 md:w-4/5 mt-10'>
         {showFiltered && (
           <>
             {filteredItems.length > 0 ? (
               filteredItems.map((item, index) => {
-                let description = item.description.slice(0, 100) + '...';
+                let description = item.description;
+                if (item.description.length > 100) {
+                  description = item.description.slice(0, 100) + '...';
+                }
                 return (
                   <div
                     key={index}

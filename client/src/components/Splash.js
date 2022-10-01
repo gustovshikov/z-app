@@ -11,7 +11,7 @@ export const Splash = () => {
         alt='main-logo'
       />
       <h1 className='text-4xl font-bold text-slate-100'>
-        Welcom to Inventory Managment!
+        Welcome to Inventory Managment!
       </h1>
       <button
         className='bg-slate-200 rounded px-3 py-2 hover:text-amber-500 hover:bg-green-800  hover:shadow-inner'

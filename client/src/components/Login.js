@@ -103,7 +103,7 @@ export const Login = () => {
           Password:
           <br />
           <input
-            type='text'
+            type='password'
             className=''
             id='password'
             onChange={e => {
